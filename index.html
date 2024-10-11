@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>How many tigers</title>
+    <style>
+      body{
+        background-color: blanchedalmond;
+        width: 700px;
+        margin: auto;
+        text-align: center;
+      }
+      h3{
+       font-family: Verdana, Geneva, Tahoma, sans-serif;
+       font-size: 30px;
+       font-weight: normal;
+      }
+      img{
+        width: 400px;
+      }
+
+      #iResult {
+        border: 2px solid blue;
+        width: 120px;
+        height: 40px;
+        border-radius: 12px;
+        margin-bottom: 10px;
+        margin: auto;
+      }
+      input{
+        width: 35px;
+        height: 35px;
+        transform: translateY(10px);
+      }
+      label{
+        font-size: 20px;
+        font-family: Verdana, Geneva, Tahoma, sans-serif
+      }
+      
+      .tickcss {
+        display: flex;
+        background-image: url(images/png-transparent-green-check-check-mark-tick-tick-angle-leaf-plant-stem-thumbnail.png);
+        background-size: 40px;
+        background-repeat: no-repeat;
+        background-position: right;
+        align-items: center;
+        font-size: 22px;
+        font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+          "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+      }.crosscss {
+        display: flex;
+        background-image: url(images/png-transparent-red-x-illustration-x-mark-check-mark-wrong-sign-angle-symmetry-cross-thumbnail.png);
+        background-size: 40px;
+        background-repeat: no-repeat;
+        background-position: right;
+        align-items: center;
+        font-size: 22px;
+        font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+          "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+      }
+      .cMainContainer{
+        margin-top: 200px;
+       font-size: 30px;
+       font-family: Arial, Helvetica, sans-serif;
+      }
+    </style>
+  </head>
+  <body onload="Quiz()">
+    <div id="iMainContainer"></div>
+    <script>
+      let vQuestionnumber = 0;
+
+      let vMainContainer = document.getElementById("iMainContainer");
+      function Quiz() {
+        vMainContainer.innerHTML = "";
+        let vQuestions = [
+        
+        {
+            question: "How Many Tigers?",
+            image: "images/1 tiger.jpg",
+            Options: ["one", "two", "three", "four", "five", "six"],
+            answer: "one",
+          },  {
+            question: "This is the Tiger?",
+            image: "images/wolf 1.jpg",
+            Options: ["TRUE", "FALSE"],
+            answer: "FALSE",
+          },
+
+          {
+            question: "How Many Tigers?",
+            image: "images/2 tigers.jpg",
+            Options: ["one", "two", "three"],
+            answer: "two",
+          },
+
+           {
+             question: "How Many Tigers?",
+                image: "images/3 tigers.jpg",
+             Options: ["one", "two", "three", "four", "five", "six"],
+             answer: "three",
+                },
+           {
+            question: "How Many Tigers?",
+            image: "images/4 tigers.jpg",
+            Options: ["one", "two", "three", "four", "five", "six"],
+            answer: "four",
+          },
+          {
+            question: "How Many Tigers?",
+            image: "images/5 tigers.jpg",
+            Options: ["one", "two", "three", "four", "five", "six"],
+            answer: "five",
+          },
+          {
+            question: "How Many Tigers?",
+            image: "images/6 tigers.jpg",
+            Options: ["one", "two", "three", "four", "five", "six"],
+             answer: "six",
+           },
+        ]
+        if(vQuestionnumber === vQuestions.length){
+          vMainContainer.innerHTML = ""
+          vMainContainer.className = "cMainContainer" 
+          vMainContainer.innerHTML = "This is the End of the Test"
+        }
+        let vh3 = document.createElement("h3");
+        vh3.innerHTML = vQuestions[vQuestionnumber].question;
+        vMainContainer.appendChild(vh3);
+
+        let vImage = document.createElement("img");
+        vImage.src = vQuestions[vQuestionnumber].image;
+        vMainContainer.appendChild(vh3);
+        vMainContainer.appendChild(vImage);
+
+        let vResult = document.createElement("div");
+        vResult.id = "iResult";
+
+        vMainContainer.appendChild(vResult);
+
+        for (let i = 0; i <vQuestions[vQuestionnumber].Options.length; i++) {
+          let vInput = document.createElement("input");
+          vInput.type = "radio";
+          vInput.name = "OneGroup";
+
+          let vLabel = document.createElement("label");
+          vLabel.textContent = vQuestions[vQuestionnumber].Options[i];
+
+          vMainContainer.appendChild(vInput);
+          vMainContainer.appendChild(vLabel);
+          vInput.addEventListener("click", abc);
+          function abc() {
+            if (vLabel.textContent === vQuestions[vQuestionnumber].answer) {
+              //alert("Ah haaaa");
+              vResult.innerHTML = "Correct";
+              vResult.setAttribute("class", "tickcss");
+            } else if (
+              vLabel.textContent != vQuestions[vQuestionnumber].answer
+            ) {
+              //alert("Oh nooooo");
+              vResult.innerHTML = "Wrong";
+              vResult.setAttribute("class", "crosscss");
+            }
+            vQuestionnumber++;
+            setTimeout(function () {
+              Quiz();
+            }, 500);
+            //Quiz();
+          }
+        }
+
+        console.log(vMainContainer);
+      }
+    </script>
+  </body>
+</html>
